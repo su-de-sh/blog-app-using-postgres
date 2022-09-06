@@ -12,12 +12,12 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, {
   },
 });
 
-const main = async ()=>{
+// const main = async ()=>{
 
-  const blogs =  await sequelize.query("SELECT * FROM blogs", { type: QueryTypes.SELECT })
+//   const blogs =  await sequelize.query("SELECT * FROM blogs", { type: QueryTypes.SELECT })
  
-  blogs.forEach(blog =>console.log(blog.author +":"+ "'"+blog.title +"'", blog.likes+"likes"))
-}
+//   blogs.forEach(blog =>console.log(blog.author +":"+ "'"+blog.title +"'", blog.likes+"likes"))
+// }
 
 
 // class Blog extends Model {}
@@ -57,7 +57,7 @@ const main = async ()=>{
 
 // }
 
-main()
+// main()
 
 // app.get('/api/blogs', async (req, res) => {
 //   const notes = await Blog.findAll()
