@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/su-de-sh/blog-app-using-postgres/issues"
   },
-  "homepage": "https://github.com/su-de-sh/blog-app-using-postgres#readme"
+  "homepage": "https://github.com/su-de-sh/blog-app-using-postgres#readme",
+  "dependencies": {
+    "dotenv": "^16.0.2",
+    "pg": "^8.8.0",
+    "sequelize": "^6.21.4"
+  }
 }
