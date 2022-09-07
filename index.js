@@ -1,5 +1,5 @@
 require('dotenv').config()
-const { Sequelize, Model, DataTypes,QueryTypes } = require('sequelize')
+const { Sequelize, Model, DataTypes,QueryTypes, BelongsTo } = require('sequelize')
 const express = require('express')
 const app = express()
 
@@ -52,6 +52,9 @@ Blog.init({
   timestamps: false,
   modelName: 'blog'
 })
+
+
+Blog.sync()
 
 // const main = async()=>{
 
