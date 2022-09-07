@@ -68,10 +68,21 @@ app.get('/api/blogs', async (req, res) => {
 })
 
 app.post('/api/blogs',async(req,res)=>{
-    const blog = new Blog(req.body)
-  const response= await blog.save()
-  res.status(201).json(response)
+  //   const blog = new Blog(req.body)
+  // const response= await blog.save()
+// console.log(req.body)
+
+  Blog.create({...req.body}).then((result) =>{
+    console.log(result)
+    res.status(201).json(result)}).catch(error =>res.status(400).json({error:error}))
+  
 })
+
+app.delete('api/blogs/:id',async (req,res)=>{
+  const id = req.params.id
+  
+}
+)
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
