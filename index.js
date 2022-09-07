@@ -72,15 +72,20 @@ app.post('/api/blogs',async(req,res)=>{
   // const response= await blog.save()
 // console.log(req.body)
 
-  Blog.create({...req.body}).then((result) =>{
-    console.log(result)
-    res.status(201).json(result)}).catch(error =>res.status(400).json({error:error}))
+  const newBlog =Blog.create({...req.body})
+  res.status(200).json(newBlog)
   
 })
 
-app.delete('api/blogs/:id',async (req,res)=>{
+app.delete('/api/blogs/:id',async (req,res)=>{
   const id = req.params.id
-  
+  console.log("here")
+
+  const deletedBlog = await Blog.destroy({
+    where: { id: id },
+  })
+
+  res.status(203).json(deletedBlog)
 }
 )
 
