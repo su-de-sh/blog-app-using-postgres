@@ -1,12 +1,13 @@
 require('dotenv').config()
 const { Sequelize, Model, DataTypes,QueryTypes, BelongsTo } = require('sequelize')
 const express = require('express')
+const { DATABASE_URL, PORT } = require('./utils/config')
 const app = express()
 
 
 app.use(express.json())
 
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
+const sequelize = new Sequelize(DATABASE_URL, {
   dialectOptions: {
     ssl: {
       require: true,
@@ -94,7 +95,7 @@ app.delete('/api/blogs/:id',async (req,res)=>{
 }
 )
 
-const PORT = process.env.PORT || 3001
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
