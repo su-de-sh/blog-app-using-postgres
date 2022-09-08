@@ -4,6 +4,7 @@ const express = require('express')
 const { DATABASE_URL, PORT } = require('./utils/config')
 const {sequelize, connectToDatabase} = require("./utils/db")
 const {Blog} = require("./models")
+const blogRouter = require('./controllers/blogRouter')
 const app = express()
 
 
@@ -33,11 +34,13 @@ app.use(express.json())
 
 // main()
 
-app.get('/api/blogs', async (req, res) => {
-  const notes = await Blog.findAll()
+// app.get('/api/blogs', async (req, res) => {
+//   const notes = await Blog.findAll()
 
-  res.json(notes)
-})
+//   res.json(notes)
+// })
+
+app.use('/api/blogs',blogRouter)
 
 app.post('/api/blogs',async(req,res)=>{
   //   const blog = new Blog(req.body)
