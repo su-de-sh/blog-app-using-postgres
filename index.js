@@ -1,8 +1,9 @@
 require('dotenv').config()
-const { Sequelize, Model, DataTypes,QueryTypes, BelongsTo } = require('sequelize')
+// const { Sequelize, Model, DataTypes,QueryTypes, BelongsTo } = require('sequelize')
 const express = require('express')
 const { DATABASE_URL, PORT } = require('./utils/config')
 const {sequelize, connectToDatabase} = require("./utils/db")
+const {Blog} = require("./models")
 const app = express()
 
 
@@ -18,38 +19,10 @@ app.use(express.json())
 // }
 
 
-class Blog extends Model {}
-Blog.init({
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
-  },
-  author: {
-    type: DataTypes.TEXT,
-    
-  },
-  url: {
-    type: DataTypes.TEXT,
-    allowNull: false
-  },
-  title: {
-    type: DataTypes.TEXT,
-    allowNull: false
-  },
-  likes:{
-    type: DataTypes.INTEGER,
-    defaultValue:0
-  }
-}, {
-  sequelize,
-  underscored: true,
-  timestamps: false,
-  modelName: 'blog'
-})
 
 
-Blog.sync()
+
+
 
 // const main = async()=>{
 
