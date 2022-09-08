@@ -6,6 +6,7 @@ const {sequelize, connectToDatabase} = require("./utils/db")
 const {Blog} = require("./models")
 const blogRouter = require('./controllers/blogRouter')
 const { errorHandler } = require('./utils/middleware')
+const userRouter = require('./controllers/userRouter')
 const app = express()
 
 
@@ -43,6 +44,7 @@ app.use(express.json())
 // })
 
 app.use('/api/blogs',blogRouter)
+app.use('/api/users',userRouter)
 
 
 
