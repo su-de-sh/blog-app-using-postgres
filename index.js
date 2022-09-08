@@ -35,7 +35,7 @@ Blog.init({
     
   },
   url: {
-    type: DataTypes.BOOLEAN,
+    type: DataTypes.TEXT,
     allowNull: false
   },
   title: {
@@ -67,16 +67,18 @@ Blog.sync()
 
 app.get('/api/blogs', async (req, res) => {
   const notes = await Blog.findAll()
+
   res.json(notes)
 })
 
 app.post('/api/blogs',async(req,res)=>{
   //   const blog = new Blog(req.body)
   // const response= await blog.save()
-// console.log(req.body)
+ console.log(req.body)
 
-  const newBlog =Blog.create({...req.body})
-  res.status(200).json(newBlog)
+  const newBlog = await Blog.create(req.body)
+
+  res.status(200).send(newBlog)
   
 })
 
