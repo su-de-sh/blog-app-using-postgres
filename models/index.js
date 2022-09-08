@@ -1,4 +1,4 @@
-const Blog = require('./blogRouter')
+const Blog = require('./blog')
 
 Blog.sync()
 
