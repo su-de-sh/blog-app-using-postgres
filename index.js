@@ -2,7 +2,7 @@ require('dotenv').config()
 const { Sequelize, Model, DataTypes,QueryTypes, BelongsTo } = require('sequelize')
 const express = require('express')
 const { DATABASE_URL, PORT } = require('./utils/config')
-const {sequelize} = require("./utils/db")
+const {sequelize, connectToDatabase} = require("./utils/db")
 const app = express()
 
 
@@ -90,6 +90,15 @@ app.delete('/api/blogs/:id',async (req,res)=>{
 )
 
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
-})
+// app.listen(PORT, () => {
+//   console.log(`Server running on port ${PORT}`)
+// })
+
+const start = async () => {
+  await connectToDatabase()
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`)
+  })
+}
+
+start()
