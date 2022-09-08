@@ -42,28 +42,7 @@ app.use(express.json())
 
 app.use('/api/blogs',blogRouter)
 
-app.post('/api/blogs',async(req,res)=>{
-  //   const blog = new Blog(req.body)
-  // const response= await blog.save()
- console.log(req.body)
 
-  const newBlog = await Blog.create(req.body)
-
-  res.status(200).send(newBlog)
-  
-})
-
-app.delete('/api/blogs/:id',async (req,res)=>{
-  const id = req.params.id
-  console.log("here")
-
-  const deletedBlog = await Blog.destroy({
-    where: { id: id },
-  })
-
-  res.status(203).json(deletedBlog)
-}
-)
 
 
 // app.listen(PORT, () => {
