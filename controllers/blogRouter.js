@@ -37,7 +37,7 @@ blogRouter.put("/:id",async (req,res)=>{
   if (updatedBlog) {
     updatedBlog.likes += 1
     await updatedBlog.save()
-    res.json(updatedBlog)
+    res.json({"likes":updatedBlog.likes})
   } else {
     res.status(404).end()
   }
