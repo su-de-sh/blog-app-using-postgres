@@ -1,4 +1,5 @@
 const { Blog } = require('../models')
+require("express-async-errors")
 
 const blogRouter = require('express').Router()
 
@@ -34,13 +35,12 @@ blogRouter.delete('/:id',async (req,res)=>{
 blogRouter.put("/:id",async (req,res)=>{
  
   const updatedBlog = await Blog.findByPk(req.params.id)
-  if (updatedBlog) {
-    updatedBlog.likes += 1
+
+    updatedBlog.likes = req.body.likes
     await updatedBlog.save()
     res.json({"likes":updatedBlog.likes})
-  } else {
-    res.status(404).end()
-  }
+  
+ 
 })
 
 

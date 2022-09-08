@@ -5,7 +5,9 @@ const { DATABASE_URL, PORT } = require('./utils/config')
 const {sequelize, connectToDatabase} = require("./utils/db")
 const {Blog} = require("./models")
 const blogRouter = require('./controllers/blogRouter')
+const { errorHandler } = require('./utils/middleware')
 const app = express()
+
 
 
 app.use(express.json())
@@ -48,6 +50,8 @@ app.use('/api/blogs',blogRouter)
 // app.listen(PORT, () => {
 //   console.log(`Server running on port ${PORT}`)
 // })
+
+app.use(errorHandler)
 
 const start = async () => {
   await connectToDatabase()
