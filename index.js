@@ -2,19 +2,13 @@ require('dotenv').config()
 const { Sequelize, Model, DataTypes,QueryTypes, BelongsTo } = require('sequelize')
 const express = require('express')
 const { DATABASE_URL, PORT } = require('./utils/config')
+const {sequelize} = require("./utils/db")
 const app = express()
 
 
 app.use(express.json())
 
-const sequelize = new Sequelize(DATABASE_URL, {
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false
-    }
-  },
-});
+
 
 // const main = async ()=>{
 
