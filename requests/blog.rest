@@ -39,9 +39,9 @@ GET http://localhost:3001/api/users
 
 
 ###
-PUT http://localhost:3001/api/users/@sudesh
+PUT http://localhost:3001/api/users/Sudesh
 Content-Type:  application/json
 
 {
-    "name":"Sudesh"
+    "username":"@sudesh"
 }

@@ -15,8 +15,11 @@ userRouter.post('/',async(req,res)=>{
 })
 
 userRouter.put('/:username',async(req,res)=>{
-    const user = await User.findOne({username:req.params.username})
-   user.name=req.body.name
+    const user = await User.findOne({where: {
+        username:req.params.username
+      }})
+   console.log(user)
+   user.username = req.body.username
 
    await user.save()
    res.status(200).json(user)
