@@ -1,3 +1,4 @@
+
 GET http://localhost:3001/api/blogs
 
 ###
@@ -6,7 +7,7 @@ POST http://localhost:3001/api/blogs
 Content-Type: application/json
 
 {
-    
+    "title":"some title",
     "author":"sudesh12",
     "url":"12something.com",
     "likes":203
@@ -29,8 +30,9 @@ POST http://localhost:3001/api/users
 Content-Type: application/json
 
 {
-    "name":"ashwin",
-    "username":"sudesh123@gmail.com"
+    "name":"Sudesh",
+    "username":"sudesh1234@gmail.com",
+    "password":"sudesh"
 
 }
 
@@ -44,4 +46,27 @@ Content-Type:  application/json
 
 {
     "username":"@sudesh"
+}
+
+###
+POST http://localhost:3001/api/login
+Content-Type: application/json
+
+{
+    "name":"Sudesh",
+    "username":"sudesh1234@gmail.com",
+    "password":"sudesh"
+}
+
+
+###
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InN1ZGVzaDEyMzRAZ21haWwuY29tIiwiaWQiOjEsImlhdCI6MTY2Mjc1MDEwOX0.vzmtq2DJRW-0H4Mzwj3_SwRSFSxKieaLbeJ1WubbxZo
+
+{
+    "title":"The Leader in You",
+    "author":"sudesh123",
+    "url":"123something.com",
+    "likes":210
 }

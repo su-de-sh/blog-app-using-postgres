@@ -27,6 +27,10 @@ User.init(
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    passwordHash: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
   },
   {
     sequelize,

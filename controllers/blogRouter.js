@@ -1,48 +1,58 @@
-const { Blog } = require('../models')
-require("express-async-errors")
+const { Blog } = require("../models");
+const User = require("../models/user");
+const { tokenExtractor, userExtractor } = require("../utils/middleware");
+require("express-async-errors");
 
-const blogRouter = require('express').Router()
+const blogRouter = require("express").Router();
 
-blogRouter.get('/',async(req,res)=>{
-    const notes = await Blog.findAll()
+blogRouter.get("/", async (req, res) => {
+  const notes = await Blog.findAll({
+    attributes: { exclude: ["userId"] },
+    include: {
+      model: User,
+      attributes: ["name"],
+    },
+  });
 
-  res.json(notes)
-})
+  res.json(notes);
+});
 
-blogRouter.post('/',async(req,res)=>{
+blogRouter.post("/", tokenExtractor, userExtractor, async (req, res) => {
   //   const blog = new Blog(req.body)
   // const response= await blog.save()
- console.log(req.body)
+  // console.log(
+  //   "########################################################",
+  //   req.body
+  // );
 
-  const newBlog = await Blog.create(req.body)
+  const blog = {
+    title: req.body.title,
+    author: req.body.author,
+    url: req.body.url,
+    likes: req.body.likes,
+    userId: req.user.id,
+  };
+  const newBlog = await Blog.create(blog);
 
-  res.status(200).send(newBlog)
-  
-})
+  res.send(newBlog);
+});
 
-blogRouter.delete('/:id',async (req,res)=>{
-  const id = req.params.id
-  console.log("here")
+blogRouter.delete("/:id", async (req, res) => {
+  const id = req.params.id;
 
   const deletedBlog = await Blog.destroy({
     where: { id: id },
-  })
+  });
 
-  res.status(203).json(deletedBlog)
-}
-)
+  res.status(203).json(deletedBlog);
+});
 
-blogRouter.put("/:id",async (req,res)=>{
- 
-  const updatedBlog = await Blog.findByPk(req.params.id)
+blogRouter.put("/:id", async (req, res) => {
+  const updatedBlog = await Blog.findByPk(req.params.id);
 
-    updatedBlog.likes = req.body.likes
-    await updatedBlog.save()
-    res.json({"likes":updatedBlog.likes})
-  
- 
-})
+  updatedBlog.likes = req.body.likes;
+  await updatedBlog.save();
+  res.json({ likes: updatedBlog.likes });
+});
 
-
-
-module.exports = blogRouter
+module.exports = blogRouter;

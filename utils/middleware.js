@@ -1,5 +1,29 @@
+const { SEKRET } = require("./config");
+const jwt = require("jsonwebtoken");
+
+const tokenExtractor = (request, response, next) => {
+  const authorization = request.get("authorization");
+  if (authorization && authorization.toLowerCase().startsWith("bearer ")) {
+    request.token = authorization.substring(7);
+  } else response.send({ error: "missing authorization token" });
+  // console.log(request.token);
+  next();
+};
+
+const userExtractor = (request, response, next) => {
+  const authorization = request.get("authorization");
+  if (authorization && authorization.toLowerCase().startsWith("bearer ")) {
+    const decodedToken = jwt.verify(request.token, SEKRET);
+
+    if (!decodedToken.id) {
+      response.status(401).json({ error: "token missing or invalid" });
+    }
+    request.user = decodedToken;
+  }
+  next();
+};
+
 const errorHandler = (error, request, response, next) => {
-  console.log("on error handler");
   if (error.name === "CastError") {
     return response.status(400).send({
       error: "malformatted id",
@@ -18,13 +42,13 @@ const errorHandler = (error, request, response, next) => {
     });
   } else if (error.name === "TypeError") {
     return response.status(401).json({
-      error: "Data donot exists for given id",
+      error: error.message,
     });
-  } else return response.status(404).json({ error: "unknown error" });
+  } else return response.status(404).json({ error: error });
 
   // console.log(error.message);
 
   // next(error);
 };
 // this has to be the last loaded middleware.
-module.exports = { errorHandler };
+module.exports = { errorHandler, tokenExtractor, userExtractor };
