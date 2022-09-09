@@ -30,7 +30,7 @@ Content-Type: application/json
 
 {
     "name":"ashwin",
-    "username":"@ashwin"
+    "username":"sudesh123@gmail.com"
 
 }
 
