@@ -37,12 +37,14 @@ const errorHandler = (error, request, response, next) => {
       error: "invalid token",
     });
   } else if (error.name === "SequelizeValidationError") {
+    console.log("here");
     return response.status(401).json({
       error: error.errors[0].message,
     });
   } else if (error.name === "TypeError") {
+    console.log("in type error");
     return response.status(401).json({
-      error: error.message,
+      error: "blog doesnot exists",
     });
   } else return response.status(404).json({ error: error });
 

@@ -37,15 +37,15 @@ blogRouter.post("/", tokenExtractor, userExtractor, async (req, res) => {
   res.send(newBlog);
 });
 
-blogRouter.delete("/:id", async (req, res) => {
-  const id = req.params.id;
+// blogRouter.delete("/:id", async (req, res) => {
+//   const id = req.params.id;
 
-  const deletedBlog = await Blog.destroy({
-    where: { id: id },
-  });
+//   const deletedBlog = await Blog.destroy({
+//     where: { id: id },
+//   });
 
-  res.status(203).json(deletedBlog);
-});
+//   res.status(203).json(deletedBlog);
+// });
 
 blogRouter.put("/:id", async (req, res) => {
   const updatedBlog = await Blog.findByPk(req.params.id);
@@ -53,6 +53,18 @@ blogRouter.put("/:id", async (req, res) => {
   updatedBlog.likes = req.body.likes;
   await updatedBlog.save();
   res.json({ likes: updatedBlog.likes });
+});
+
+blogRouter.delete("/:id", tokenExtractor, userExtractor, async (req, res) => {
+  const blogToDelete = await Blog.findByPk(req.params.id);
+
+  if (req.user.id === blogToDelete.userId) {
+    await Blog.destroy({ where: { id: req.params.id } });
+
+    res.status(200).send("Blog deleted successfully!!");
+  } else {
+    res.json({ error: "You are not authorized to delete." });
+  }
 });
 
 module.exports = blogRouter;
