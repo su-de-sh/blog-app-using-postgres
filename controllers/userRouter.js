@@ -12,6 +12,7 @@ userRouter.get("/", async (req, res) => {
       model: Blog,
       attributes: ["title"],
     },
+    attributes: { exclude: ["passwordHash"] },
   });
   res.status(200).json(users);
 });
