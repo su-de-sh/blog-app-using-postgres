@@ -9,7 +9,14 @@ const blogRouter = require("express").Router();
 blogRouter.get("/", async (req, res) => {
   let where = {};
   if (req.query.search) {
-    where.title = { [Op.substring]: req.query.search };
+    // case-insensitive query
+
+    where = {
+      [Op.or]: [
+        { title: { [Op.iLike]: `%${req.query.search}%` } },
+        { author: { [Op.iLike]: `%${req.query.search}%` } },
+      ],
+    };
   }
   const notes = await Blog.findAll({
     attributes: { exclude: ["userId"] },
