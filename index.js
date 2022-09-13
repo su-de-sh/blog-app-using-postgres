@@ -12,6 +12,7 @@ const {
 } = require("./utils/middleware");
 const userRouter = require("./controllers/userRouter");
 const loginRouter = require("./controllers/loginRouter");
+const authorRouter = require("./controllers/authorRouter");
 const app = express();
 
 app.use(express.json());
@@ -39,6 +40,7 @@ app.use(express.json());
 // })
 
 app.use("/api/blogs", blogRouter);
+app.use("/api/authors", authorRouter);
 app.use("/api/users", userRouter);
 app.use("/api/login", loginRouter);
 
