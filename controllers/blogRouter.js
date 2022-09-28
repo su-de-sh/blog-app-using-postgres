@@ -50,9 +50,10 @@ blogRouter.post("/", tokenExtractor, userExtractor, async (req, res) => {
       author: req.body.author,
       url: req.body.url,
       likes: req.body.likes,
+      year: req.body.year,
       userId: req.user.id,
-      year: req.user.year,
     };
+    console.log(blog);
     const newBlog = await Blog.create(blog);
 
     res.send(newBlog);

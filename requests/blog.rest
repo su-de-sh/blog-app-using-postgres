@@ -63,13 +63,14 @@ Content-Type: application/json
 ###
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InN1ZGVzaDQzMjFAZ21haWwuY29tIiwiaWQiOjUsImlhdCI6MTY2MjgyNzI1Nn0._g3tW1IMl_jtIhQ_qY3n7Eq84KMSujBo8-Rb9t8ddVs
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InN1ZGVzaDQzMjFAZ21haWwuY29tIiwiaWQiOjEsImlhdCI6MTY2NDM5MDk4NH0.KOJODHiB7pP3WMo-wt1eWoucs5CQ6tEFprCvn6n8kUI
 
 {
-    "title":"Where is my mouse",
-    "author":"Holyman",
-    "url":"123something.com",
-    "likes":216
+    "title":"This is my Spouse",
+    "author":"Ukulele",
+    "url":"123some.com",
+    "likes":29,
+    "year":"2021"
 }
 
 
