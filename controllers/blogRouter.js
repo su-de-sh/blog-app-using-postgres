@@ -39,16 +39,24 @@ blogRouter.post("/", tokenExtractor, userExtractor, async (req, res) => {
   //   req.body
   // );
 
-  const blog = {
-    title: req.body.title,
-    author: req.body.author,
-    url: req.body.url,
-    likes: req.body.likes,
-    userId: req.user.id,
-  };
-  const newBlog = await Blog.create(blog);
+  if (
+    Number(req.body.year) < 1991 ||
+    Number(req.body.year) > new Date().getFullYear()
+  )
+    res.json({ error: "invalid year of creation" });
+  else {
+    const blog = {
+      title: req.body.title,
+      author: req.body.author,
+      url: req.body.url,
+      likes: req.body.likes,
+      userId: req.user.id,
+      year: req.user.year,
+    };
+    const newBlog = await Blog.create(blog);
 
-  res.send(newBlog);
+    res.send(newBlog);
+  }
 });
 
 // blogRouter.delete("/:id", async (req, res) => {

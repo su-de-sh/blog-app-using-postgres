@@ -24,6 +24,7 @@ module.exports = {
       },
       updated_at: { type: DataTypes.DATE },
       created_at: { type: DataTypes.DATE },
+
       //   user_id: {
       //     type: DataTypes.INTEGER,
       //     allowNull: false,
